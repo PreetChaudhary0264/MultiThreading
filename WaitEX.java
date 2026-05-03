@@ -1,15 +1,25 @@
 public class WaitEX implements Runnable {
+    private final Object lock = new Object();
+
+    Object getLock(){
+        return lock;
+    }
 
     @Override
     public synchronized void run() {
         System.out.println(Thread.currentThread().getName() + " started");
         try{
-            wait();
+            wait();  //this.wait();
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
         System.out.println(Thread.currentThread().getName() + " finished");
     }
+
+    //notify and wait synchronized block ke ander hi hote hai
+    //wait and notify Object class ke methods hai to inhe kisi bhi object se run kra ja skta hai jsie main WaitEx ke obj se notify ko run krra hu
+    //ya fir seperate obj use krlo agar multiple threads ke sath share krna hai to
+    //Object lock = new Object();
 
     public static void main(String[] args) {
         WaitEX obj = new WaitEX();
@@ -31,24 +41,13 @@ public class WaitEX implements Runnable {
             obj.notifyAll();
         }
 
-//        for (int i = 0; i < 5; i++) {
-//            WaitEX obj = new WaitEX();
-//
-//            Thread t1 = new Thread(obj);
-//            Thread t2 = new Thread(obj);
-//
-//            t1.start();
-//            t2.start();
-//
-//            try {
-//                Thread.sleep(2000);
-//            } catch (Exception e) {}
-//
-//            synchronized (obj) {
-//                obj.notifyAll();
-//            }
-//
-//            System.out.println("----- iteration done -----");
+//        synchronized (obj.lock){
+//            obj.lock.notify();
 //        }
+
+//        synchronized(obj) {
+//            // koi aur code
+//        }     agar kisi aur ne bhi obj pe lock le liya
+                //→ tera thread block ho sakta hai unexpectedly
     }
 }

@@ -18,5 +18,13 @@ public class Volatilekeyword {
         t2.start();
 
         //t and t2 both are same we can use either way
+
+
+        //volatile kayword ka ek exampel dedo jisme ek counter hoga and jab tak while loop run hoga counter++;
+//        while(running){
+//            countrr++;
+//        }
+//
+//        and then main thread aake isko false kr dei unnignko then ye immediately sbhi thereads ke liye false ho jayga
     }
 }
